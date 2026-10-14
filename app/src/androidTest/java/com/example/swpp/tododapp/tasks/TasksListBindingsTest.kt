@@ -239,9 +239,9 @@ class TasksListBindingsTest {
         onView(allOf(withId(R.id.due_date_text), hasSibling(withText(title))))
 
     @Test
-    fun tasksList_checkThenUncheckTaskWithNoDueDate_showsClearThenNoLabel() {
+    fun tasksList_checkThenUncheckTaskWithNoDueDate_showsClearThenNoLabel() = runTest {
         // GIVEN - The task list shows an active task with no due date
-        repository.addTasks(Task("TITLE1", "DESC1", false, "id1", null))
+        repository.saveTask(Task("TITLE1", "DESC1", false, "id1", null))
         launchTasksFragment()
 
         // WHEN - The task is checked
@@ -258,9 +258,9 @@ class TasksListBindingsTest {
     }
 
     @Test
-    fun tasksList_checkThenUncheckTaskWithDueDate_showsClearThenDMinus3() {
+    fun tasksList_checkThenUncheckTaskWithDueDate_showsClearThenDMinus3() = runTest {
         // GIVEN - The task list shows an active task due in 3 days
-        repository.addTasks(Task("TITLE1", "DESC1", false, "id1", LocalDate.now().plusDays(3)))
+        repository.saveTask(Task("TITLE1", "DESC1", false, "id1", LocalDate.now().plusDays(3)))
         launchTasksFragment()
 
         // WHEN - The task is checked
